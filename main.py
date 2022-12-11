@@ -1,9 +1,9 @@
 import kivy
+import random
 kivy.require('1.9.1')
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.uix.image import Image
-#import random
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.properties import Clock
@@ -18,9 +18,9 @@ class GameManager(ScreenManager):
 
 class Pipe(Image):
      
-    #    def __init__(self, **kwargs):
-    #        super(Pipe, self).__init__(**kwargs)
-    flag=0    #decide the pipeup or pipedown
+    def __init__(self, **kwargs):
+        super(Pipe, self).__init__(**kwargs)
+        self.flag=0    #decide the pipeup or pipedown
         
     def on_pos(self,*args):
        
@@ -47,7 +47,7 @@ class Bird(Image):
         
     def  is_collide_pipe(self,pipe):
         if self.collide_widget(pipe):
-            return False
+            return True
             
     def is_collide_magic_bottle(self,bottle):
         if self.collide_widget(bottle):
@@ -156,13 +156,14 @@ class Screen2(Screen):
             self.v += 850
             self.points += 1
             coin = Coin()
+            coin.pos = (self.bird.x+self.bird.width,self.bird.y+self.bird.height) 
             self.bird.add_widget(coin)
             coin.animate_coin()
             
             if self.points % 5==0:
                self.magic = 'magic_bottle'
              
-            Clock.schedule_once(lambda dt: sound(), .1)
+            #Clock.schedule_once(lambda dt: sound(), .1)
                          
         if self.distance>=(850*self.c):
            self.add_pipes(3,self.magic)
@@ -182,13 +183,13 @@ class Screen2(Screen):
             pipeup= Pipe()
             pipeup.flag=1
             
-            pipeup.height = self.ids.window.height/8
-            #random.choice([i for i in range(2,5)])       
+            pipeup.height = self.ids.window.height/random.choice([i for i in range(2,5)])       
              
             pipeup.pos= self.ids.window.pos[0]+i*850,self.ids.window.pos[1]
             
             if power == 'magic_bottle':
                 self.bottle = magic()
+                
                 if 0<self.points <=10:
                     self.bottle.source = 'Images/portions/blue.png'
                 elif 10< self.points <20:
@@ -196,7 +197,7 @@ class Screen2(Screen):
                 elif 20 <= self.points <= 30:
                      self.bottle.source = 'Images/portions/grey.png'
                 else:
-                     self.bottle.source = 'Images/portions/red.png'#%random.choice(['blue','red','grey'])
+                     self.bottle.source = 'Images/portions/%s.png'%random.choice(['blue','red','grey'])
      
                 self.bottle.size=self.bird.size
                 pipeup.add_widget(self.bottle)
@@ -254,7 +255,6 @@ class Screen2(Screen):
 class main(App):
     
     def build(self):
-        #Builder.load_file('main.kv')
         return GameManager()
          
 if __name__=='__main__':

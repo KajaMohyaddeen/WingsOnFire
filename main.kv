@@ -1,4 +1,4 @@
-# import random random
+#: import random random
 #: import gb gb
 #:import FadeTransition  kivy.uix.screenmanager.FadeTransition
 <GameManager>:
@@ -35,7 +35,7 @@
 #                pos:self.pos
         source:'Images/pipes/'+self.parent.theme+'cap.png'
         id:cap
-        #pos:(self.x,self.y)
+        pos:(self.x,self.y)
         size_hint:None,None
         width:self.parent.width*1.5
         height:dp(20)
@@ -49,6 +49,7 @@
 #        outline_width:5
 #        font_size:'8dp'
 #        pos:self.parent.center
+
 <Coin>:
     canvas:
         RoundedRectangle:
@@ -59,7 +60,7 @@
         
     size_hint:None,None
     size:dp(15),dp(15)
-    pos: (self.parent.x+self.parent.width,self.parent.y+self.parent.height) if self.parent else (0,0)
+
     
 <Bird>:
 #    canvas.before:
@@ -69,7 +70,7 @@
 #            size:self.size
 #            pos:self.pos
     flag :0
-    source:'Images/birds/rosebird_down.png'#%random.choice(['greenbird','rosebird','brownbird'])
+    source:'Images/birds/%s_down.png'%random.choice(['greenbird','rosebird','brownbird'])
 #    allow_stretch:True
 #    keep_ratio:False
     size_hint:None,None
@@ -144,37 +145,56 @@
                 pos:self.pos
                 
         Widget:
+            id:coin_panel
             size_hint:.2,.05
             pos_hint:{'center_x':.8,'center_y':.9}
+            
             canvas.before:
                 Rectangle:
-                    source:'Images/bg/grey.png'
+                    source:'Images/start.png'
                     size:self.size
                     pos:self.pos
-                Color:
-                    rgba: 0, 0, 0, 1
-                Line:
-                    width: 5
-                    rectangle: self.x, self.y, self.width, self.height
-                   
+                    
+            canvas.after:
+                PushMatrix:
+                    Color:
+                        rgba:0,0,0,1
+                    Line:
+                        width: 5
+                        rectangle: self.x, self.y, self.width, self.height
+                PopMatrix:  
 
-        Label:
-            text:str(int(root.distance))
-            outline_color:(0,0,0,1)
-            font_name:gb.bebas
-            outline_width:5
-          
-            
-        Label:
+            Coin:                
+                size:dp(20),dp(20)
+                pos:self.parent.center[0]-self.width/2+50,self.parent.center[1]-self.height/2
+                #pos_hint:{'center_x':.5,'center_y':.5}
+                
+            Label:   
+                text:str(root.points)
+                outline_color:(0,0,0,1)
+                pos:self.parent.x+self.width-100,self.parent.y+dp(2)
+                font_name:gb.caviar
+                outline_width:6
+                font_size:sp(25)
+    
+#        Label:
+#            text:str(int(root.distance))
+#            outline_color:(0,0,0,1)
+#            font_name:gb.bebas
+#            outline_width:5
+#          
+#            
+#        Label:
 #            canvas:
 #                RoundedRectangle:
 #                    size:self.size
 #                    pos:self.pos
 #                    radius:[20]
-            text:str(root.points)
-            outline_color:(0,0,0,1)
-            pos_hint:{'center_x':.5,'center_y':.8}
-            #font_name:#random.choice([gb.caviar,gb.bebas,gb.seasrn,gb.wingding,gb.greatvibes])
-            outline_width:7
-            font_size:sp(50)
-          
+#            text:str(root.points)
+#            outline_color:(0,0,0,1)
+#            pos:root.ids.coin_panel.pos
+#            #pos_hint:{'center_x':.5,'center_y':.8}
+#            font_name:gb.caviar
+#            outline_width:7
+#            font_size:sp(50)
+#          
