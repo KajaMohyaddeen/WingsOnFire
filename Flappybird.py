@@ -1,3 +1,4 @@
+import kivy
 from kivy.app import App
 from kivy.uix.image import Image
 import random
@@ -8,7 +9,6 @@ from kivy.animation import Animation
 from kivy.core.audio import SoundLoader
 from kivy.uix.screenmanager import ScreenManager,Screen,WipeTransition
 from kivy.properties import NumericProperty,StringProperty
-import kivy
 kivy.require('1.9.1')
 
 class GameManager(ScreenManager):
