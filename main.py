@@ -1,4 +1,6 @@
 import kivy
+kivy.require('1.9.1')
+from kivy.lang import Builder
 from kivy.app import App
 from kivy.uix.image import Image
 #import random
@@ -9,7 +11,7 @@ from kivy.animation import Animation
 from kivy.core.audio import SoundLoader
 from kivy.uix.screenmanager import ScreenManager,Screen,WipeTransition
 from kivy.properties import NumericProperty,StringProperty
-kivy.require('1.9.1')
+
 
 class GameManager(ScreenManager):
     pass
@@ -247,10 +249,11 @@ class Screen2(Screen):
         self.points = 0
     
                                 
-class FlappybirdApp(App):
+class main(App):
     
     def build(self):
+        Builder.load_file('main.kv')
         return GameManager()
          
 if __name__=='__main__':
-    FlappybirdApp().run()
+    main().run()
