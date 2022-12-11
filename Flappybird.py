@@ -1,7 +1,7 @@
 import kivy
 from kivy.app import App
 from kivy.uix.image import Image
-import random
+#import random
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.properties import Clock
@@ -179,7 +179,7 @@ class Screen2(Screen):
             pipeup= Pipe()
             pipeup.flag=1
             
-            pipeup.height = self.ids.window.height/random.choice([i for i in range(2,5)])       
+            pipeup.height = self.ids.window.height/4#random.choice([i for i in range(2,5)])       
              
             pipeup.pos= self.ids.window.pos[0]+i*850,self.ids.window.pos[1]
             
@@ -192,7 +192,7 @@ class Screen2(Screen):
                 elif 20 <= self.points <= 30:
                      self.bottle.source = 'Images/portions/grey.png'
                 else:
-                     self.bottle.source = 'Images/portions/%s.png'%random.choice(['blue','red','grey'])
+                     self.bottle.source = 'Images/portions/red.png'#%random.choice(['blue','red','grey'])
      
                 self.bottle.size=self.bird.size
                 pipeup.add_widget(self.bottle)

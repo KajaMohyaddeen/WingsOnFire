@@ -1,4 +1,4 @@
-#:import random random
+# import random random
 #: import gb gb
 #:import FadeTransition  kivy.uix.screenmanager.FadeTransition
 <GameManager>:
@@ -69,7 +69,7 @@
 #            size:self.size
 #            pos:self.pos
     flag :0
-    source:'Images/birds/%s_down.png'%random.choice(['greenbird','rosebird','brownbird'])
+    source:'Images/birds/rosebird_down.png'#%random.choice(['greenbird','rosebird','brownbird'])
 #    allow_stretch:True
 #    keep_ratio:False
     size_hint:None,None
@@ -174,7 +174,7 @@
             text:str(root.points)
             outline_color:(0,0,0,1)
             pos_hint:{'center_x':.5,'center_y':.8}
-            font_name:random.choice([gb.caviar,gb.bebas,gb.seasrn,gb.wingding,gb.greatvibes])
+            #font_name:#random.choice([gb.caviar,gb.bebas,gb.seasrn,gb.wingding,gb.greatvibes])
             outline_width:7
             font_size:sp(50)
           
