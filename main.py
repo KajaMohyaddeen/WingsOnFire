@@ -18,9 +18,9 @@ class GameManager(ScreenManager):
 
 class Pipe(Image):
      
-    def __init__(self, **kwargs):
-        super(Pipe, self).__init__(**kwargs)
-        self.flag=0    #decide the pipeup or pipedown
+    #    def __init__(self, **kwargs):
+    #        super(Pipe, self).__init__(**kwargs)
+    flag=0    #decide the pipeup or pipedown
         
     def on_pos(self,*args):
        
@@ -66,16 +66,16 @@ class Bird(Image):
                 Clock.schedule_once(lambda dt:self.parent.manager.get_screen('screen2').start_move(),1)
             self.source = self.source.split('_')[0]+'_up.png'
             self.velocity = 550#250
-            wing = SoundLoader.load('Audio/wing.wav')
-            wing.volume = .1
-            wing.play()
+            #wing = SoundLoader.load('Audio/wing.wav')
+            #wing.volume = .1
+            #wing.play()
         else:
             Clock.schedule_once(lambda dt:self.parent.manager.get_screen('screen2').go_home(),.1)
                     
     def on_touch_up(self,touch):
         if self.alive:
             self.source = self.source.split('_')[0]+'_down.png'
-            SoundLoader.load('Audio/swoosh.wav').play()
+            #SoundLoader.load('Audio/swoosh.wav').play()
           
 class magic(Image):
     pass
@@ -127,8 +127,9 @@ class Screen2(Screen):
         self.p = None
      
         def sound():
-            self.p=SoundLoader.load('Audio/points.wav')
-            self.p.play()
+            pass
+            #self.p=SoundLoader.load('Audio/points.wav')
+            #self.p.play()
         
         game_speed = 550
         
@@ -141,7 +142,7 @@ class Screen2(Screen):
         
             if self.bottle:                 
                 if  self.bird.is_collide_magic_bottle(self.bottle):
-                    SoundLoader.load('Audio/win.mp3').play()
+                    #SoundLoader.load('Audio/win.mp3').play()
                     self.change_theme()
                     self.bottle = ''
                     
@@ -181,7 +182,8 @@ class Screen2(Screen):
             pipeup= Pipe()
             pipeup.flag=1
             
-            pipeup.height = self.ids.window.height/4#random.choice([i for i in range(2,5)])       
+            pipeup.height = self.ids.window.height/8
+            #random.choice([i for i in range(2,5)])       
              
             pipeup.pos= self.ids.window.pos[0]+i*850,self.ids.window.pos[1]
             
@@ -216,8 +218,8 @@ class Screen2(Screen):
             
     def game_over(self):
         
-        SoundLoader.load('Audio/hit.wav').play()
-        SoundLoader.load('Audio/die.ogg').play()
+        #SoundLoader.load('Audio/hit.wav').play()
+        #SoundLoader.load('Audio/die.ogg').play()
         
         self.move_pipe.cancel()
         self.bird.update_event.cancel()      
@@ -252,7 +254,7 @@ class Screen2(Screen):
 class main(App):
     
     def build(self):
-        Builder.load_file('main.kv')
+        #Builder.load_file('main.kv')
         return GameManager()
          
 if __name__=='__main__':
